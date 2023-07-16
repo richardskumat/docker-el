@@ -25,7 +25,7 @@ RUN dnf -y install \
   && dnf clean all
 
 # Disable requiretty.
-RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
+# RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
 
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 CMD ["/usr/sbin/init"]
