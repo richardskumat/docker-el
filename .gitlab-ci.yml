@@ -33,8 +33,8 @@ stages:
 build:
   stage: build
   script:
-   - docker build -f f38 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:f38 .
-   - docker build -f al9 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:al9  .
+   - docker build -f f38 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:f38 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:fedora .
+   - docker build -f al9 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:al9 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:el .
    - docker images
    - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:f38 cat /etc/os-release
    - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:f38 systemctl --version
@@ -46,8 +46,8 @@ push_to_dockerhub:
  only:
    - master
  script:
-   - docker build -f Dockerfile -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:f38 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:fedora .
-   - docker build -f Dockerfile-root -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:al9 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:el .
+   - docker build -f f38 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:f38 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:fedora .
+   - docker build -f al9 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:al9 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:el .
    # summary
    - docker images
    #- docker push $DOCKERHUB_USER/$DOCKERHUB_PROJECT:tag
